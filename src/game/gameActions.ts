@@ -40,11 +40,13 @@ export function* watchOnGame(): any {
     try {
       const data = yield take(socketChannel);
       console.log(data);
+      console.log(socket);
       if (data.includes('map:')) {
         yield put(setMap(data));
       }
       if (data.includes('new:')) {
         yield fork(getMap, socket);
+        yield put(updateMessage(data.split('open: ')[1]));
       }
       if (data.includes('open:')) {
         yield put(updateMessage(data.split('open: ')[1]));
