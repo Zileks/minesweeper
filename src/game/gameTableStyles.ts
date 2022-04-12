@@ -1,32 +1,33 @@
 import { makeStyles } from '@mui/styles';
 
+// bez important
 export const useGameTableStyles = makeStyles({
   cell: {
-    width: '50px !important',
-    height: '50px !important',
+    width: '50px ',
+    height: '50px ',
     border: '1px solid rgb(243,243,243)',
-    borderRadius: '0px !important',
+    borderRadius: '0px ',
   },
   smallCell: {
-    width: '17px !important',
-    height: '17px !important',
+    width: '17px ',
+    height: '17px ',
     border: '1px solid rgb(243,243,243)',
-    borderRadius: '0px !important',
+    borderRadius: '0px ',
     overflow: 'hidden',
     cursor: 'pointer',
   },
   smallActiveCell: {
-    width: '50px !important',
-    height: '50px !important',
+    width: '50px ',
+    height: '50px ',
     border: '1px solid rgb(243,243,243)',
-    borderRadius: '0px !important',
+    borderRadius: '0px ',
     backgroundColor: 'wheat',
   },
   activeCell: {
-    width: '17px !important',
-    height: '17px !important',
+    width: '17px ',
+    height: '17px ',
     border: '1px solid rgb(243,243,243)',
-    borderRadius: '0px !important',
+    borderRadius: '0px ',
     backgroundColor: 'wheat',
   },
   text: {

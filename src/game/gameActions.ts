@@ -2,6 +2,7 @@ import { take, put, call, apply, fork } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
 import { GameClient } from '../api/api';
 import { setMap, updateMessage } from './gameSlice';
+import { MAP_WEBSOCKET, NEW_WEBSOCKET, OPEN_WEBSOCKET } from '../constants';
 
 function createSocketChannel(socket: any) {
   return eventChannel((emit) => {
@@ -25,7 +26,7 @@ function createSocketChannel(socket: any) {
 }
 
 function* getMap(socket: any) {
-  yield apply(socket, socket.send, ['map']);
+  yield apply(socket, socket.send, [`${MAP_WEBSOCKET}`]);
 }
 
 export function* handleCreateGame(action: any) {
@@ -36,21 +37,23 @@ export function* watchOnGame(): any {
   const socket: any = yield call(GameClient.createConnection);
   const socketChannel = yield call(createSocketChannel, socket);
 
+  function* getMapAndUpdateMessage(data: string) {
+    yield fork(getMap, socket);
+    yield put(updateMessage(data.split(`${OPEN_WEBSOCKET}: `)[1]));
+  }
+
   while (true) {
     try {
       const data = yield take(socketChannel);
-      console.log(data);
-      console.log(socket);
-      if (data.includes('map:')) {
+
+      if (data.includes(`${MAP_WEBSOCKET}:`)) {
         yield put(setMap(data));
       }
-      if (data.includes('new:')) {
-        yield fork(getMap, socket);
-        yield put(updateMessage(data.split('open: ')[1]));
+      if (data.includes(`${NEW_WEBSOCKET}:`)) {
+        yield getMapAndUpdateMessage(data);
       }
-      if (data.includes('open:')) {
-        yield put(updateMessage(data.split('open: ')[1]));
-        yield fork(getMap, socket);
+      if (data.includes(`${OPEN_WEBSOCKET}:`)) {
+        yield getMapAndUpdateMessage(data);
       }
     } catch (err) {
       console.error('socket error:', err);

@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import * as types from './gameTypes';
+import { MAP_WEBSOCKET } from '../constants';
 
 function convertMapPayload(payload: any): string[] {
-  const rowList = payload.split('map:')[1].split('\n');
+  const rowList = payload.split(`${MAP_WEBSOCKET}:`)[1].split('\n');
   return rowList.filter((item: string[]) => !!item.length);
 }
 

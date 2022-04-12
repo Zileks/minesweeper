@@ -1,17 +1,39 @@
-import React from 'react';
 import { GameClient } from '../api/api';
 import { useGameTableStyles } from './gameTableStyles';
-import Button from '@mui/material/Button';
-import { useSelector } from 'react-redux';
+import {
+  OPEN_WEBSOCKET,
+  SQUARE_SYMBOL,
+  MAP_SIZE_SMALL,
+  BOMB_SYMBOL,
+  FAILURE_COLOR,
+  SUCCESS_COLOR,
+} from '../constants';
+import classNames from 'classnames';
+
 interface Props {
   gameMap: string[];
 }
 
 export function GameTable({ gameMap }: Props) {
   const classes = useGameTableStyles();
-  console.log(gameMap.length);
+
+  const gameTableActiveCellClassNames = classNames({
+    [`${classes.smallActiveCell}`]: gameMap.length <= MAP_SIZE_SMALL,
+    [`${classes.activeCell}`]: gameMap.length > MAP_SIZE_SMALL,
+  });
+
+  const gameTableTextClassNames = classNames({
+    [`${classes.smalltext}`]: gameMap.length <= MAP_SIZE_SMALL,
+    [`${classes.text}`]: gameMap.length > MAP_SIZE_SMALL,
+  });
+
+  const gameTableCellClassNames = classNames({
+    [`${classes.cell}`]: gameMap.length <= MAP_SIZE_SMALL,
+    [`${classes.smallCell}`]: gameMap.length > MAP_SIZE_SMALL,
+  });
+
   const onCellClick = (y: number, x: number) => {
-    GameClient.socket.send(`open ${x} ${y}`);
+    GameClient.socket.send(`${OPEN_WEBSOCKET} ${x} ${y}`);
   };
 
   const renderMap = (items: any) => {
@@ -19,35 +41,34 @@ export function GameTable({ gameMap }: Props) {
       const squares = item.split('');
       const row = squares.map((square: any, columnIndex: number) => {
         const key = `square-${rowIndex}-${columnIndex}`;
-        const testId = `square-${rowIndex}-${columnIndex}`;
-        if (square !== '□') {
+        if (square !== `${SQUARE_SYMBOL}`) {
           return (
             <div
-              style={{ color: square === '*' ? 'red' : 'green' }}
+              style={{
+                color:
+                  square === `${BOMB_SYMBOL}`
+                    ? `${FAILURE_COLOR}`
+                    : `${SUCCESS_COLOR}`,
+              }}
               onClick={() => onCellClick(rowIndex, columnIndex)}
-              className={
-                gameMap.length <= 10
-                  ? classes.smallActiveCell
-                  : classes.activeCell
-              }
+              className={gameTableActiveCellClassNames}
               key={key}
             >
-              <p
-                className={
-                  gameMap.length <= 10 ? classes.smalltext : classes.text
-                }
-              >
-                {square}
-              </p>
+              <p className={gameTableTextClassNames}>{square}</p>
             </div>
           );
         }
         return (
           <div
-            style={{ color: square === '*' ? 'red' : 'green' }}
+            style={{
+              color:
+                square === `${BOMB_SYMBOL}`
+                  ? `${FAILURE_COLOR}`
+                  : `${SUCCESS_COLOR}`,
+            }}
             onClick={() => onCellClick(rowIndex, columnIndex)}
+            className={gameTableCellClassNames}
             key={key}
-            className={gameMap.length <= 10 ? classes.cell : classes.smallCell}
           ></div>
         );
       });
@@ -60,7 +81,7 @@ export function GameTable({ gameMap }: Props) {
   };
 
   if (!gameMap.length) {
-    return <p>hehe</p>;
+    return <p>Pick your level to start</p>;
   }
 
   return <>{renderMap(gameMap)}</>;

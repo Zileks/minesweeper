@@ -1,12 +1,8 @@
 import { makeStyles } from '@mui/styles';
 import { createTheme } from '@mui/material/styles';
 
+// ne treba da postoji important ovde
 export const useStyles = makeStyles({
-  headText: {
-    fontWeight: 'bold',
-    fontSize: 32,
-    textAlign: 'center',
-  },
   layout: {
     position: 'fixed',
     background: 'white',
@@ -27,9 +23,6 @@ export const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
   },
-  header: {
-    flex: 2,
-  },
   content: {
     flex: 5,
     display: 'flex',
@@ -45,27 +38,6 @@ export const useStyles = makeStyles({
   smallContent: {
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  footer: {
-    margin: '1% 0',
-    flex: 3,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-  },
-  startButton: {
-    minWidth: '150px !important',
-  },
-  levelSelector: {
-    maxWidth: '150px !important',
-    marginBottom: '15px !important',
-  },
-  message: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'red',
-    textAlign: 'center',
   },
 });
 
