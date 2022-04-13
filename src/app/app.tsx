@@ -63,9 +63,9 @@ function App() {
             <Header gameState={gameState} />
             <div className={appContentClassNames}>
               <GameTable
-                gameMap={gameState.map}
                 gameFlag={flag}
                 onChange={handleChange}
+                gameState={gameState}
               />
             </div>
             <Footer gameState={gameState} onChange={handleChange} />

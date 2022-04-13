@@ -4,12 +4,16 @@ import { LOADED_MAP } from '../../../utils/constants/constants';
 
 describe('<GameTable />', () => {
   it('renders with empty map', () => {
-    const gameMap: string[] = [];
+    const gameState = {
+      map: [],
+      message: '',
+      connectionStatus: 'offline',
+    };
     const gameFlag: number[][] = [];
     const gameFunction = () => {};
     const wrapper = render(
       <GameTable
-        gameMap={gameMap}
+        gameState={gameState}
         gameFlag={gameFlag}
         onChange={gameFunction}
       />
@@ -19,12 +23,16 @@ describe('<GameTable />', () => {
     );
   });
   it('renders with map', () => {
-    const gameMap: string[] = LOADED_MAP;
+    const gameState = {
+      map: LOADED_MAP,
+      message: '',
+      connectionStatus: 'offline',
+    };
     const gameFlag: number[][] = [];
     const gameFunction = () => {};
     const wrapper = render(
       <GameTable
-        gameMap={gameMap}
+        gameState={gameState}
         gameFlag={gameFlag}
         onChange={gameFunction}
       />

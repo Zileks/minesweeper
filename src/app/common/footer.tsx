@@ -17,7 +17,7 @@ import { useStyles } from './footerStyle';
 
 interface Props {
   gameState: any;
-  onChange: any;
+  onChange: Function;
 }
 
 export function Footer({ gameState, onChange }: Props) {

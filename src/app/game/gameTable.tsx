@@ -11,32 +11,32 @@ import {
 import classNames from 'classnames';
 
 interface Props {
-  gameMap: string[];
   gameFlag: number[][];
   onChange: Function;
+  gameState: any;
 }
 
-export function GameTable({ gameMap, gameFlag, onChange }: Props) {
+export function GameTable({ gameFlag, onChange, gameState }: Props) {
   const classes = useStyles();
 
   const gameTableActiveCellClassNames = classNames({
-    [`${classes.activeCell}`]: gameMap.length <= MAP_SIZE_SMALL,
-    [`${classes.smallActiveCell}`]: gameMap.length > MAP_SIZE_SMALL,
+    [`${classes.activeCell}`]: gameState.map.length <= MAP_SIZE_SMALL,
+    [`${classes.smallActiveCell}`]: gameState.map.length > MAP_SIZE_SMALL,
   });
 
   const gameTableTextClassNames = classNames({
-    [`${classes.text}`]: gameMap.length <= MAP_SIZE_SMALL,
-    [`${classes.smallText}`]: gameMap.length > MAP_SIZE_SMALL,
+    [`${classes.text}`]: gameState.map.length <= MAP_SIZE_SMALL,
+    [`${classes.smallText}`]: gameState.map.length > MAP_SIZE_SMALL,
   });
 
   const gameTableCellClassNames = classNames({
-    [`${classes.cell}`]: gameMap.length <= MAP_SIZE_SMALL,
-    [`${classes.smallCell}`]: gameMap.length > MAP_SIZE_SMALL,
+    [`${classes.cell}`]: gameState.map.length <= MAP_SIZE_SMALL,
+    [`${classes.smallCell}`]: gameState.map.length > MAP_SIZE_SMALL,
   });
 
   const gameTableFlagClassNames = classNames({
-    [`${classes.flag}`]: gameMap.length <= MAP_SIZE_SMALL,
-    [`${classes.smallFlag}`]: gameMap.length > MAP_SIZE_SMALL,
+    [`${classes.flag}`]: gameState.map.length <= MAP_SIZE_SMALL,
+    [`${classes.smallFlag}`]: gameState.map.length > MAP_SIZE_SMALL,
   });
 
   const onCellClick = (y: number, x: number) => {
@@ -44,7 +44,7 @@ export function GameTable({ gameMap, gameFlag, onChange }: Props) {
   };
 
   function isArrayInArray(source: number[][], search: number[]) {
-    for (var i = 0, len = source.length; i < len; i++) {
+    for (let i = 0, len = source.length; i < len; i++) {
       if (source[i][0] === search[0] && source[i][1] === search[1]) {
         return true;
       }
@@ -108,7 +108,9 @@ export function GameTable({ gameMap, gameFlag, onChange }: Props) {
             className={gameTableCellClassNames}
             key={key}
           >
-            {isFlagSet && <span className={gameTableFlagClassNames}>🚩</span>}
+            {isFlagSet && gameState.message !== 'You lose' && (
+              <span className={gameTableFlagClassNames}>🚩</span>
+            )}
           </div>
         );
       });
@@ -120,9 +122,9 @@ export function GameTable({ gameMap, gameFlag, onChange }: Props) {
     });
   };
 
-  if (!gameMap.length) {
+  if (!gameState.map.length) {
     return <p data-testid='empty-map-paragraph'>Pick your level to start</p>;
   }
 
-  return <>{renderMap(gameMap)}</>;
+  return <>{renderMap(gameState.map)}</>;
 }
