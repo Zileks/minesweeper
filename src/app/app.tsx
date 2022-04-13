@@ -8,7 +8,10 @@ import { initialiazeGame } from './game/gameSlice';
 import { RootState } from './store/store';
 import { useStyles } from './styles';
 import { GameTable } from './game/gameTable';
-import { MAP_SIZE_SMALL } from '../utils/constants/constants';
+import {
+  MAP_SIZE_SMALL,
+  CONNECTION_STATUS,
+} from '../utils/constants/constants';
 import { Header } from './common/header';
 import { Footer } from './common/footer';
 import classNames from 'classnames';
@@ -25,13 +28,13 @@ function App() {
   });
   const connectionStatusClassNames = classNames({
     [`${classes.statusIcon} ${classes.online}`]:
-      gameState.connectionStatus === 'online',
+      gameState.connectionStatus === CONNECTION_STATUS.ONLINE,
     [`${classes.statusIcon} ${classes.offline}`]:
-      gameState.connectionStatus === 'offline',
+      gameState.connectionStatus === CONNECTION_STATUS.OFFLINE,
   });
 
   useEffect(() => {
-    dispatch(initialiazeGame('online'));
+    dispatch(initialiazeGame(CONNECTION_STATUS.ONLINE));
   }, [dispatch]);
 
   return (

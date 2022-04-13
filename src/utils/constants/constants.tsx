@@ -18,3 +18,7 @@ export const LOADED_MAP: string[] = [
   '□□□□□□□□□□',
   '□□□□□□□□□□',
 ];
+export enum CONNECTION_STATUS {
+  ONLINE = 'online',
+  OFFLINE = 'offline',
+}
