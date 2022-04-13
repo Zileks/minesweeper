@@ -41,7 +41,6 @@ export function GameTable({ gameMap }: Props) {
       const squares = item.split('');
       const row = squares.map((square: any, columnIndex: number) => {
         const key = `square-${rowIndex}-${columnIndex}`;
-        console.log(key);
         if (square !== `${SQUARE_SYMBOL}`) {
           return (
             <div

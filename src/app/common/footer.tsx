@@ -9,7 +9,10 @@ import {
 } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { createGame, initialiazeGame } from '../game/gameSlice';
-import { NEW_WEBSOCKET_KEY } from '../../utils/constants/constants';
+import {
+  NEW_WEBSOCKET_KEY,
+  CONNECTION_STATUS,
+} from '../../utils/constants/constants';
 import { useStyles } from './footerStyle';
 
 interface Props {
@@ -20,10 +23,9 @@ export function Footer({ gameState }: Props) {
   const [level, setLevel] = useState(1);
   const classes = useStyles();
   const dispatch = useDispatch();
-  console.log(gameState.map.length);
   const onPlayGame = () => {
     dispatch(createGame(`${NEW_WEBSOCKET_KEY} ${level}`));
-    dispatch(initialiazeGame('online'));
+    dispatch(initialiazeGame(CONNECTION_STATUS.ONLINE));
   };
 
   const handleOnLevelChange = (event: SelectChangeEvent) => {
