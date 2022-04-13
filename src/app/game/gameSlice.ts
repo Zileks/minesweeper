@@ -10,13 +10,16 @@ function convertMapPayload(payload: any): string[] {
 const initialState: types.GameState = {
   map: [],
   message: '',
+  connectionStatus: 'offline',
 };
 
 const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    initialiazeGame(state) {},
+    initialiazeGame(state, action) {
+      state.connectionStatus = action.payload;
+    },
     createGame(state, action) {},
     getMap(state) {},
     setMap(state, action) {

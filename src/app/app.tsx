@@ -23,9 +23,15 @@ function App() {
       gameState.map.length <= MAP_SIZE_SMALL,
     [`${classes.content}`]: gameState.map.length > MAP_SIZE_SMALL,
   });
+  const connectionStatusClassNames = classNames({
+    [`${classes.statusIcon} ${classes.online}`]:
+      gameState.connectionStatus === 'online',
+    [`${classes.statusIcon} ${classes.offline}`]:
+      gameState.connectionStatus === 'offline',
+  });
 
   useEffect(() => {
-    dispatch(initialiazeGame());
+    dispatch(initialiazeGame('online'));
   }, [dispatch]);
 
   return (
@@ -34,6 +40,15 @@ function App() {
         <CssBaseline />
         <div className={classes.layout}>
           <Paper elevation={2} className={classes.container}>
+            <div className={classes.connectionStatus}>
+              <span className={connectionStatusClassNames}></span>
+              <span
+                className={classes.connectionStatusText}
+                data-testid='connection-span'
+              >
+                {gameState.connectionStatus}
+              </span>
+            </div>
             <Header gameState={gameState} />
             <div className={appContentClassNames}>
               <GameTable gameMap={gameState.map} />

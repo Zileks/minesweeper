@@ -16,6 +16,7 @@ describe('<Header />', () => {
     const gameState = {
       map: [],
       message: '',
+      connectionStatus: 'offline',
     };
     const store = mockStore(gameState);
     const wrapper = Render(store, Header, gameState);
@@ -25,6 +26,7 @@ describe('<Header />', () => {
     const gameState = {
       map: [],
       message: 'Hello',
+      connectionStatus: 'offline',
     };
     const store = mockStore(gameState);
     const wrapper = Render(store, Header, gameState);

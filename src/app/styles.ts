@@ -39,6 +39,32 @@ export const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  connectionStatus: {
+    position: 'absolute',
+    right: 15,
+    padding: '10px',
+    display: 'flex',
+    alignContent: 'center',
+  },
+
+  connectionStatusText: {
+    color: 'white',
+  },
+
+  statusIcon: {
+    alignSelf: 'center',
+    height: '15px',
+    width: '15px',
+    borderRadius: '50%',
+    marginRight: '5px',
+  },
+
+  online: {
+    background: 'green',
+  },
+  offline: {
+    background: 'red',
+  },
 });
 
 export const theme = createTheme({

@@ -8,7 +8,6 @@ export function Header({ gameState }: Props) {
   const classes = useStyles();
 
   const renderMessage = (message: string) => {
-    console.log(message);
     return message !== 'OK' ? message : '';
   };
 

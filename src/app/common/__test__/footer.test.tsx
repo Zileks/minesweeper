@@ -18,6 +18,7 @@ describe('<Footer />', () => {
       game: {
         map: [],
         message: '',
+        connectionStatus: 'offline',
       },
     };
     const store = mockStore(initialState);
@@ -30,6 +31,7 @@ describe('<Footer />', () => {
       game: {
         map: LOADED_MAP,
         message: '',
+        connectionStatus: 'offline',
       },
     };
 

@@ -23,7 +23,7 @@ export function Footer({ gameState }: Props) {
   console.log(gameState.map.length);
   const onPlayGame = () => {
     dispatch(createGame(`${NEW_WEBSOCKET_KEY} ${level}`));
-    dispatch(initialiazeGame());
+    dispatch(initialiazeGame('online'));
   };
 
   const handleOnLevelChange = (event: SelectChangeEvent) => {
