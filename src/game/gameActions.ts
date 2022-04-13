@@ -1,6 +1,6 @@
 import { take, put, call, apply, fork } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
-import { GameClient } from '../api/api';
+import { GameService } from '../services/api';
 import { setMap, updateMessage } from './gameSlice';
 import { MAP_WEBSOCKET, NEW_WEBSOCKET, OPEN_WEBSOCKET } from '../constants';
 
@@ -30,11 +30,11 @@ function* getMap(socket: any) {
 }
 
 export function* handleCreateGame(action: any) {
-  yield apply(GameClient.socket, GameClient.socket.send, [action.payload]);
+  yield apply(GameService.socket, GameService.socket.send, [action.payload]);
 }
 
 export function* watchOnGame(): any {
-  const socket: any = yield call(GameClient.createConnection);
+  const socket: any = yield call(GameService.createConnection);
   const socketChannel = yield call(createSocketChannel, socket);
 
   function* getMapAndUpdateMessage(data: string) {

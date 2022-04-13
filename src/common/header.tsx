@@ -8,13 +8,16 @@ export function Header({ gameState }: Props) {
   const classes = useStyles();
 
   const renderMessage = (message: string) => {
+    console.log(message);
     return message !== 'OK' ? message : '';
   };
 
   return (
     <div className={classes.header}>
       <p className={classes.headText}>Minesweeper</p>
-      <p className={classes.message}>{renderMessage(gameState.message)}</p>
+      <p className={classes.message} data-testid='show-message-paragraph'>
+        {renderMessage(gameState.message)}
+      </p>
     </div>
   );
 }

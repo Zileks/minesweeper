@@ -1,7 +1,7 @@
 import { makeStyles } from '@mui/styles';
 
 // bez important
-export const useGameTableStyles = makeStyles({
+export const useStyles = makeStyles({
   cell: {
     width: '50px ',
     height: '50px ',

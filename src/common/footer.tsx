@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Button,
   FormControl,
@@ -20,23 +20,19 @@ export function Footer({ gameState }: Props) {
   const [level, setLevel] = useState(1);
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  console.log(gameState.map.length);
   const onPlayGame = () => {
-    // nije idealno
     dispatch(createGame(`${NEW_WEBSOCKET} ${level}`));
     dispatch(initialiazeGame());
   };
 
   const handleOnLevelChange = (event: SelectChangeEvent) => {
-    // nije idealno
     const newLevel = Number(event?.target?.value);
     setLevel(newLevel);
   };
 
   return (
     <div className={classes.footer}>
-      {/* koristiti useForm hook uz ovo, izmestiti iz main */}
-
       <FormControl
         fullWidth
         className={classes.levelSelector}

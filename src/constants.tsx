@@ -6,3 +6,15 @@ export const SQUARE_SYMBOL: string = '□';
 export const BOMB_SYMBOL: string = '*';
 export const SUCCESS_COLOR: string = 'green';
 export const FAILURE_COLOR: string = 'red';
+export const LOADED_MAP: string[] = [
+  '□□□□□□□□□□',
+  '□□□□□□□□□□',
+  '□□□□□□□□□□',
+  '□□□□□□□□□□',
+  '□□□□□□□□□□',
+  '□□□□□□□□□□',
+  '□□□□□□□□□□',
+  '□□□□□□□□□□',
+  '□□□□□□□□□□',
+  '□□□□□□□□□□',
+];

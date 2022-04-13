@@ -1,5 +1,5 @@
-import { GameClient } from '../api/api';
-import { useGameTableStyles } from './gameTableStyles';
+import { GameService } from '../services/api';
+import { useStyles } from './gameTableStyles';
 import {
   OPEN_WEBSOCKET,
   SQUARE_SYMBOL,
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export function GameTable({ gameMap }: Props) {
-  const classes = useGameTableStyles();
+  const classes = useStyles();
 
   const gameTableActiveCellClassNames = classNames({
     [`${classes.smallActiveCell}`]: gameMap.length <= MAP_SIZE_SMALL,
@@ -33,10 +33,11 @@ export function GameTable({ gameMap }: Props) {
   });
 
   const onCellClick = (y: number, x: number) => {
-    GameClient.socket.send(`${OPEN_WEBSOCKET} ${x} ${y}`);
+    GameService.socket.send(`${OPEN_WEBSOCKET} ${x} ${y}`);
   };
 
   const renderMap = (items: any) => {
+    console.log(items);
     return items.map((item: any, rowIndex: number) => {
       const squares = item.split('');
       const row = squares.map((square: any, columnIndex: number) => {

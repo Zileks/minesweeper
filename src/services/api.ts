@@ -1,7 +1,7 @@
 export const SOCKET_ENDPOINT = 'wss://hometask.eg1236.com/game1/';
 
 type Socket = WebSocket;
-class GameClient {
+class GameService {
   private static _socket: Socket;
 
   public static get socket() {
@@ -13,13 +13,13 @@ class GameClient {
   }
 
   public static createConnection(url: string = SOCKET_ENDPOINT) {
-    if (GameClient.socket) {
-      return GameClient.socket;
+    if (GameService.socket) {
+      return GameService.socket;
     }
     const socketConnection = new WebSocket(url);
-    GameClient.socket = socketConnection;
-    return GameClient.socket;
+    GameService.socket = socketConnection;
+    return GameService.socket;
   }
 }
 
-export { GameClient };
+export { GameService };
