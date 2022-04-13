@@ -2,8 +2,8 @@ import App from '../app';
 import { cleanup } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
 import createSagaMiddleware from 'redux-saga';
-import { watcherSaga } from '../../store/sagas/rootSaga';
-import { Render } from '../../utils/render';
+import { watcherSaga } from '../store/sagas/rootSaga';
+import { Render } from '../../utils/tests/render';
 
 const sagaMiddleware = createSagaMiddleware();
 const mockStore = configureStore([sagaMiddleware]);

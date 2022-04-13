@@ -1,5 +1,5 @@
 import { Header } from '../header';
-import { Render } from '../../utils/render';
+import { Render } from '../../../utils/tests/render';
 import configureStore from 'redux-mock-store';
 import createSagaMiddleware from 'redux-saga';
 import { cleanup } from '@testing-library/react';

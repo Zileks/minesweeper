@@ -2,8 +2,8 @@ import { Footer } from '../footer';
 import { cleanup } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
 import createSagaMiddleware from 'redux-saga';
-import { Render } from '../../utils/render';
-import { LOADED_MAP } from '../../constants';
+import { Render } from '../../../utils/tests/render';
+import { LOADED_MAP } from '../../../utils/constants/constants';
 
 const sagaMiddleware = createSagaMiddleware();
 const mockStore = configureStore([sagaMiddleware]);

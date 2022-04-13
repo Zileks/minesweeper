@@ -1,13 +1,13 @@
-import { GameService } from '../services/api';
+import { GameService } from '../services/gameService';
 import { useStyles } from './gameTableStyles';
 import {
-  OPEN_WEBSOCKET,
+  OPEN_WEBSOCKET_KEY,
   SQUARE_SYMBOL,
   MAP_SIZE_SMALL,
   BOMB_SYMBOL,
   FAILURE_COLOR,
   SUCCESS_COLOR,
-} from '../constants';
+} from '../../utils/constants/constants';
 import classNames from 'classnames';
 
 interface Props {
@@ -33,15 +33,15 @@ export function GameTable({ gameMap }: Props) {
   });
 
   const onCellClick = (y: number, x: number) => {
-    GameService.socket.send(`${OPEN_WEBSOCKET} ${x} ${y}`);
+    GameService.socket.send(`${OPEN_WEBSOCKET_KEY} ${x} ${y}`);
   };
 
   const renderMap = (items: any) => {
-    console.log(items);
     return items.map((item: any, rowIndex: number) => {
       const squares = item.split('');
       const row = squares.map((square: any, columnIndex: number) => {
         const key = `square-${rowIndex}-${columnIndex}`;
+        console.log(key);
         if (square !== `${SQUARE_SYMBOL}`) {
           return (
             <div
@@ -82,7 +82,7 @@ export function GameTable({ gameMap }: Props) {
   };
 
   if (!gameMap.length) {
-    return <p>Pick your level to start</p>;
+    return <p data-testid='empty-map-paragraph'>Pick your level to start</p>;
   }
 
   return <>{renderMap(gameMap)}</>;

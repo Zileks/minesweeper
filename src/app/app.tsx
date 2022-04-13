@@ -4,13 +4,13 @@ import { Paper } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { initialiazeGame } from '../game/gameSlice';
-import { RootState } from '../store/store';
+import { initialiazeGame } from './game/gameSlice';
+import { RootState } from './store/store';
 import { useStyles } from './styles';
-import { GameTable } from '../game/gameTable';
-import { MAP_SIZE_SMALL } from '../constants';
-import { Header } from '../common/header';
-import { Footer } from '../common/footer';
+import { GameTable } from './game/gameTable';
+import { MAP_SIZE_SMALL } from '../utils/constants/constants';
+import { Header } from './common/header';
+import { Footer } from './common/footer';
 import classNames from 'classnames';
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
 
   useEffect(() => {
     dispatch(initialiazeGame());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

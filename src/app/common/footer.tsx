@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { createGame, initialiazeGame } from '../game/gameSlice';
-import { NEW_WEBSOCKET } from '../constants';
+import { NEW_WEBSOCKET_KEY } from '../../utils/constants/constants';
 import { useStyles } from './footerStyle';
 
 interface Props {
@@ -22,7 +22,7 @@ export function Footer({ gameState }: Props) {
   const dispatch = useDispatch();
   console.log(gameState.map.length);
   const onPlayGame = () => {
-    dispatch(createGame(`${NEW_WEBSOCKET} ${level}`));
+    dispatch(createGame(`${NEW_WEBSOCKET_KEY} ${level}`));
     dispatch(initialiazeGame());
   };
 
