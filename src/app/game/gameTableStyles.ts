@@ -6,8 +6,11 @@ export const useStyles = makeStyles({
     width: '50px ',
     height: '50px ',
     border: '1px solid rgb(243,243,243)',
-    borderRadius: '0px ',
+    textAlign: 'center',
+    display: 'flex',
+    justifyContent: 'center',
   },
+
   smallCell: {
     width: '17px ',
     height: '17px ',
@@ -16,27 +19,28 @@ export const useStyles = makeStyles({
     overflow: 'hidden',
     cursor: 'pointer',
   },
-  smallActiveCell: {
+  activeCell: {
     width: '50px ',
     height: '50px ',
     border: '1px solid rgb(243,243,243)',
     borderRadius: '0px ',
     backgroundColor: 'wheat',
   },
-  activeCell: {
+  smallActiveCell: {
     width: '17px ',
     height: '17px ',
     border: '1px solid rgb(243,243,243)',
     borderRadius: '0px ',
     backgroundColor: 'wheat',
   },
-  text: {
+
+  smallText: {
     fontWeight: 'bold',
     textAlign: 'center',
     margin: 0,
     fontSize: '12px',
   },
-  smalltext: {
+  text: {
     fontWeight: 'bold',
     textAlign: 'center',
     display: 'flex',
@@ -47,5 +51,11 @@ export const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  flag: {
+    marginTop: '10px',
+  },
+  smallFlag: {
+    fontSize: '14px',
   },
 });

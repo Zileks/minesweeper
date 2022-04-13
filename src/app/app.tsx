@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Paper } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
@@ -18,7 +18,15 @@ import classNames from 'classnames';
 
 function App() {
   const classes = useStyles();
+
   const gameState = useSelector((state: RootState) => state.game);
+
+  const [flag, setFlag] = useState<number[][]>([]);
+
+  const handleChange = (newValue: []) => {
+    setFlag(newValue);
+  };
+
   const dispatch = useDispatch();
 
   const appContentClassNames = classNames({
@@ -54,9 +62,13 @@ function App() {
             </div>
             <Header gameState={gameState} />
             <div className={appContentClassNames}>
-              <GameTable gameMap={gameState.map} />
+              <GameTable
+                gameMap={gameState.map}
+                gameFlag={flag}
+                onChange={handleChange}
+              />
             </div>
-            <Footer gameState={gameState} />
+            <Footer gameState={gameState} onChange={handleChange} />
           </Paper>
         </div>
       </ThemeProvider>

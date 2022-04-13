@@ -17,15 +17,17 @@ import { useStyles } from './footerStyle';
 
 interface Props {
   gameState: any;
+  onChange: any;
 }
 
-export function Footer({ gameState }: Props) {
+export function Footer({ gameState, onChange }: Props) {
   const [level, setLevel] = useState(1);
   const classes = useStyles();
   const dispatch = useDispatch();
   const onPlayGame = () => {
-    dispatch(createGame(`${NEW_WEBSOCKET_KEY} ${level}`));
     dispatch(initialiazeGame(CONNECTION_STATUS.ONLINE));
+    dispatch(createGame(`${NEW_WEBSOCKET_KEY} ${level}`));
+    onChange([]);
   };
 
   const handleOnLevelChange = (event: SelectChangeEvent) => {

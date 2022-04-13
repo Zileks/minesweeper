@@ -12,19 +12,21 @@ import classNames from 'classnames';
 
 interface Props {
   gameMap: string[];
+  gameFlag: number[][];
+  onChange: Function;
 }
 
-export function GameTable({ gameMap }: Props) {
+export function GameTable({ gameMap, gameFlag, onChange }: Props) {
   const classes = useStyles();
 
   const gameTableActiveCellClassNames = classNames({
-    [`${classes.smallActiveCell}`]: gameMap.length <= MAP_SIZE_SMALL,
-    [`${classes.activeCell}`]: gameMap.length > MAP_SIZE_SMALL,
+    [`${classes.activeCell}`]: gameMap.length <= MAP_SIZE_SMALL,
+    [`${classes.smallActiveCell}`]: gameMap.length > MAP_SIZE_SMALL,
   });
 
   const gameTableTextClassNames = classNames({
-    [`${classes.smalltext}`]: gameMap.length <= MAP_SIZE_SMALL,
-    [`${classes.text}`]: gameMap.length > MAP_SIZE_SMALL,
+    [`${classes.text}`]: gameMap.length <= MAP_SIZE_SMALL,
+    [`${classes.smallText}`]: gameMap.length > MAP_SIZE_SMALL,
   });
 
   const gameTableCellClassNames = classNames({
@@ -32,15 +34,33 @@ export function GameTable({ gameMap }: Props) {
     [`${classes.smallCell}`]: gameMap.length > MAP_SIZE_SMALL,
   });
 
+  const gameTableFlagClassNames = classNames({
+    [`${classes.flag}`]: gameMap.length <= MAP_SIZE_SMALL,
+    [`${classes.smallFlag}`]: gameMap.length > MAP_SIZE_SMALL,
+  });
+
   const onCellClick = (y: number, x: number) => {
     GameService.socket.send(`${OPEN_WEBSOCKET_KEY} ${x} ${y}`);
   };
+
+  function isArrayInArray(source: number[][], search: number[]) {
+    for (var i = 0, len = source.length; i < len; i++) {
+      if (source[i][0] === search[0] && source[i][1] === search[1]) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   const renderMap = (items: any) => {
     return items.map((item: any, rowIndex: number) => {
       const squares = item.split('');
       const row = squares.map((square: any, columnIndex: number) => {
         const key = `square-${rowIndex}-${columnIndex}`;
+
+        const location: number[] = [rowIndex, columnIndex];
+
+        const isFlagSet = isArrayInArray(gameFlag, location);
         if (square !== `${SQUARE_SYMBOL}`) {
           return (
             <div
@@ -54,7 +74,9 @@ export function GameTable({ gameMap }: Props) {
               className={gameTableActiveCellClassNames}
               key={key}
             >
-              <p className={gameTableTextClassNames}>{square}</p>
+              <p className={gameTableTextClassNames}>
+                {square === '0' ? '' : square}
+              </p>
             </div>
           );
         }
@@ -66,10 +88,28 @@ export function GameTable({ gameMap }: Props) {
                   ? `${FAILURE_COLOR}`
                   : `${SUCCESS_COLOR}`,
             }}
-            onClick={() => onCellClick(rowIndex, columnIndex)}
+            onClick={() => {
+              if (!isFlagSet) {
+                onCellClick(rowIndex, columnIndex);
+              }
+            }}
+            onContextMenu={(e) => {
+              e.preventDefault();
+              if (isArrayInArray(gameFlag, location)) {
+                const newArr = gameFlag.filter(
+                  (field) =>
+                    field[0] !== location[0] || field[1] !== location[1]
+                );
+                onChange(newArr);
+              } else {
+                onChange([...gameFlag, location]);
+              }
+            }}
             className={gameTableCellClassNames}
             key={key}
-          ></div>
+          >
+            {isFlagSet && <span className={gameTableFlagClassNames}>🚩</span>}
+          </div>
         );
       });
       return (

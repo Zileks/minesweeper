@@ -13,7 +13,6 @@ export const useStyles = makeStyles({
     alignItems: 'center',
   },
   container: {
-    overflowY: 'scroll',
     width: '100%',
     height: '100%',
     borderStyle: 'solid',
@@ -22,6 +21,7 @@ export const useStyles = makeStyles({
     borderColor: 'transparent',
     display: 'flex',
     flexDirection: 'column',
+    overflow: 'scroll',
   },
   content: {
     flex: 5,
