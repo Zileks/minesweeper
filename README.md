@@ -1,3 +1,5 @@
+Minesweeper game connected to WebSocket wss://hometask.eg1236.com/game1/ , enjoy! :)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts
