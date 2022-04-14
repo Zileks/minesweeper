@@ -1,11 +1,6 @@
 import { Header } from '../header';
-import { Render } from '../../../utils/tests/render';
-import configureStore from 'redux-mock-store';
-import createSagaMiddleware from 'redux-saga';
+import { customRender as render } from '../../../utils/tests/render';
 import { cleanup } from '@testing-library/react';
-
-const sagaMiddleware = createSagaMiddleware();
-const mockStore = configureStore([sagaMiddleware]);
 
 describe('<Header />', () => {
   afterEach(() => {
@@ -18,8 +13,8 @@ describe('<Header />', () => {
       message: '',
       connectionStatus: 'offline',
     };
-    const store = mockStore(gameState);
-    const wrapper = Render(store, Header, gameState);
+
+    const wrapper = render(Header, gameState);
     expect(wrapper.getByTestId('show-message-paragraph')).toHaveTextContent('');
   });
   it('renderMessage functions returns parametar message', () => {
@@ -28,8 +23,7 @@ describe('<Header />', () => {
       message: 'Hello',
       connectionStatus: 'offline',
     };
-    const store = mockStore(gameState);
-    const wrapper = Render(store, Header, gameState);
+    const wrapper = render(Header, gameState);
     expect(wrapper.getByTestId('show-message-paragraph')).toHaveTextContent(
       'Hello'
     );

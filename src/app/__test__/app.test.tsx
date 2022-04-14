@@ -1,12 +1,6 @@
 import App from '../app';
 import { cleanup } from '@testing-library/react';
-import configureStore from 'redux-mock-store';
-import createSagaMiddleware from 'redux-saga';
-import { watcherSaga } from '../store/sagas/rootSaga';
-import { Render } from '../../utils/tests/render';
-
-const sagaMiddleware = createSagaMiddleware();
-const mockStore = configureStore([sagaMiddleware]);
+import { customRender as render } from '../../utils/tests/render';
 
 describe('App', () => {
   afterEach(() => {
@@ -21,10 +15,8 @@ describe('App', () => {
         connectionStatus: 'offline',
       },
     };
-    const store = mockStore(initialState);
-    sagaMiddleware.run(watcherSaga);
 
-    Render(store, App);
+    render(App, initialState);
   });
   it('offline status indicator if we are not connected', () => {
     const initialState = {
@@ -35,8 +27,7 @@ describe('App', () => {
       },
     };
 
-    const store = mockStore(initialState);
-    const wrapper = Render(store, App);
+    const wrapper = render(App, initialState);
     expect(wrapper.getByTestId('connection-span')).toHaveTextContent('offline');
   });
   it('online status indicator if we are connected', () => {
@@ -48,8 +39,7 @@ describe('App', () => {
       },
     };
 
-    const store = mockStore(initialState);
-    const wrapper = Render(store, App);
+    const wrapper = render(App, initialState);
     expect(wrapper.getByTestId('connection-span')).toHaveTextContent('online');
   });
 });

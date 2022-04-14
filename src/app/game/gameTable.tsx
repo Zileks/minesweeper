@@ -43,18 +43,19 @@ export function GameTable({ gameFlag, onChange, gameState }: Props) {
     GameService.socket.send(`${OPEN_WEBSOCKET_KEY} ${x} ${y}`);
   };
 
-  function isArrayInArray(source: number[][], search: number[]) {
+  const isArrayInArray = (source: number[][], search: number[]) => {
     for (let i = 0, len = source.length; i < len; i++) {
       if (source[i][0] === search[0] && source[i][1] === search[1]) {
         return true;
       }
     }
     return false;
-  }
+  };
 
   const renderMap = (items: any) => {
     return items.map((item: any, rowIndex: number) => {
       const squares = item.split('');
+
       const row = squares.map((square: any, columnIndex: number) => {
         const key = `square-${rowIndex}-${columnIndex}`;
 

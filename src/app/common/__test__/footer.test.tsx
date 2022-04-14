@@ -1,12 +1,7 @@
 import { Footer } from '../footer';
 import { cleanup } from '@testing-library/react';
-import configureStore from 'redux-mock-store';
-import createSagaMiddleware from 'redux-saga';
-import { Render } from '../../../utils/tests/render';
+import { customRender as render } from '../../../utils/tests/render';
 import { LOADED_MAP } from '../../../utils/constants/constants';
-
-const sagaMiddleware = createSagaMiddleware();
-const mockStore = configureStore([sagaMiddleware]);
 
 describe('<Footer />', () => {
   afterEach(() => {
@@ -21,8 +16,7 @@ describe('<Footer />', () => {
         connectionStatus: 'offline',
       },
     };
-    const store = mockStore(initialState);
-    const wrapper = Render(store, Footer, initialState.game);
+    const wrapper = render(Footer, initialState.game);
 
     expect(wrapper.getByTestId('start-game-btn')).toHaveTextContent('Start');
   });
@@ -35,8 +29,7 @@ describe('<Footer />', () => {
       },
     };
 
-    const store = mockStore(initialState);
-    const wrapper = Render(store, Footer, initialState.game);
+    const wrapper = render(Footer, initialState.game);
     expect(wrapper.getByTestId('start-game-btn')).toHaveTextContent(
       'Play again'
     );
