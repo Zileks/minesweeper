@@ -10,13 +10,8 @@ describe('<GameTable />', () => {
       connectionStatus: 'offline',
     };
     const gameFlag: number[][] = [];
-    const gameFunction = () => {};
     const wrapper = render(
-      <GameTable
-        gameState={gameState}
-        gameFlag={gameFlag}
-        onChange={gameFunction}
-      />
+      <GameTable gameState={gameState} gameFlag={gameFlag} onChange={jest.fn} />
     );
     expect(wrapper.getByTestId('empty-map-paragraph')).toHaveTextContent(
       'Pick your level to start'
@@ -29,13 +24,8 @@ describe('<GameTable />', () => {
       connectionStatus: 'offline',
     };
     const gameFlag: number[][] = [];
-    const gameFunction = () => {};
     const wrapper = render(
-      <GameTable
-        gameState={gameState}
-        gameFlag={gameFlag}
-        onChange={gameFunction}
-      />
+      <GameTable gameState={gameState} gameFlag={gameFlag} onChange={jest.fn} />
     );
     expect(wrapper).toBeTruthy;
   });

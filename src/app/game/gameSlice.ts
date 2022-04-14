@@ -2,9 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import * as types from './gameTypes';
 import { MAP_WEBSOCKET_KEY } from '../../utils/constants/constants';
 
-function convertMapPayload(payload: any): string[] {
+function convertMapPayload(payload: string): string[] {
   const rowList = payload.split(`${MAP_WEBSOCKET_KEY}:`)[1].split('\n');
-  return rowList.filter((item: string[]) => !!item.length);
+  return rowList.filter((item: string) => !!item.length);
 }
 
 const initialState: types.GameState = {

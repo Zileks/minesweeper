@@ -8,24 +8,13 @@ describe('<Header />', () => {
     cleanup();
   });
   it('renderMessage function returns empty string if we get "OK" response', () => {
-    const gameState = {
-      map: [],
-      message: '',
-      connectionStatus: 'offline',
-    };
-
-    const wrapper = render(Header, gameState);
+    const wrapper = render(<Header gameMessage={''} />);
     expect(wrapper.getByTestId('show-message-paragraph')).toHaveTextContent('');
   });
   it('renderMessage functions returns parametar message', () => {
-    const gameState = {
-      map: [],
-      message: 'Hello',
-      connectionStatus: 'offline',
-    };
-    const wrapper = render(Header, gameState);
+    const wrapper = render(<Header gameMessage='test' />);
     expect(wrapper.getByTestId('show-message-paragraph')).toHaveTextContent(
-      'Hello'
+      'test'
     );
   });
 });

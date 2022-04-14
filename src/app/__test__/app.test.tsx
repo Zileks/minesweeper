@@ -8,26 +8,10 @@ describe('App', () => {
     cleanup();
   });
   it('renders without crashing', () => {
-    const initialState = {
-      game: {
-        map: [],
-        message: '',
-        connectionStatus: 'offline',
-      },
-    };
-
-    render(App, initialState);
+    render(<App />);
   });
   it('offline status indicator if we are not connected', () => {
-    const initialState = {
-      game: {
-        map: [],
-        message: '',
-        connectionStatus: 'offline',
-      },
-    };
-
-    const wrapper = render(App, initialState);
+    const wrapper = render(<App />);
     expect(wrapper.getByTestId('connection-span')).toHaveTextContent('offline');
   });
   it('online status indicator if we are connected', () => {
@@ -39,7 +23,7 @@ describe('App', () => {
       },
     };
 
-    const wrapper = render(App, initialState);
+    const wrapper = render(<App />, initialState);
     expect(wrapper.getByTestId('connection-span')).toHaveTextContent('online');
   });
 });

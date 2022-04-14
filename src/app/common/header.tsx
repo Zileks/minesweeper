@@ -1,10 +1,10 @@
 import { useStyles } from './headerStyle';
 
 interface Props {
-  gameState: any;
+  gameMessage: string;
 }
 
-export function Header({ gameState }: Props) {
+export function Header({ gameMessage }: Props) {
   const classes = useStyles();
 
   const renderMessage = (message: string) => {
@@ -15,7 +15,7 @@ export function Header({ gameState }: Props) {
     <div className={classes.header}>
       <p className={classes.headText}>Minesweeper</p>
       <p className={classes.message} data-testid='show-message-paragraph'>
-        {renderMessage(gameState.message)}
+        {renderMessage(gameMessage)}
       </p>
     </div>
   );

@@ -16,11 +16,11 @@ import {
 import { useStyles } from './footerStyle';
 
 interface Props {
-  gameState: any;
+  gameMap: string[];
   onChange: Function;
 }
 
-export function Footer({ gameState, onChange }: Props) {
+export function Footer({ gameMap, onChange }: Props) {
   const [level, setLevel] = useState(1);
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -64,7 +64,7 @@ export function Footer({ gameState, onChange }: Props) {
         className={classes.startButton}
         data-testid='start-game-btn'
       >
-        {gameState.map.length ? 'Play again' : 'Start'}
+        {gameMap.length ? 'Play again' : 'Start'}
       </Button>
     </div>
   );

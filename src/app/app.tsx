@@ -23,7 +23,7 @@ function App() {
 
   const [flag, setFlag] = useState<number[][]>([]);
 
-  const handleChange = (newValue: []) => {
+  const handleChange = (newValue: number[][]) => {
     setFlag(newValue);
   };
 
@@ -60,7 +60,7 @@ function App() {
                 {gameState.connectionStatus}
               </span>
             </div>
-            <Header gameState={gameState} />
+            <Header gameMessage={gameState.message} />
             <div className={appContentClassNames}>
               <GameTable
                 gameFlag={flag}
@@ -68,7 +68,7 @@ function App() {
                 gameState={gameState}
               />
             </div>
-            <Footer gameState={gameState} onChange={handleChange} />
+            <Footer gameMap={gameState.map} onChange={handleChange} />
           </Paper>
         </div>
       </ThemeProvider>
